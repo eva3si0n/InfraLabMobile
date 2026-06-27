@@ -19,14 +19,14 @@ targets:
     platform: iOS
     sources:
       - Sources
-    resources:
-      - Resources
+      - path: Resources/Assets.xcassets   # explicit so actool compiles it (icon → Assets.car)
     info:
       path: Sources/Info.plist
       properties:
         CFBundleDisplayName: InfraLab
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleIconName: AppIcon
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
