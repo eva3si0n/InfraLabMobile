@@ -48,10 +48,33 @@ final class AppState: ObservableObject {
         homePageBaseURL = ud.string(forKey: "homePageBaseURL") ?? ""
         let stored = ud.double(forKey: "refreshInterval")
         refreshInterval = stored > 0 ? stored : 30
+        seedFromBundleIfNeeded()
     }
 
     var isConfigured: Bool {
         !kumaBaseURL.isEmpty || !grafanaBaseURL.isEmpty || !homePageBaseURL.isEmpty
+    }
+
+    /// Pre-fill Settings from a bundled `seed.json` on first launch (personal builds).
+    /// The file is gitignored — never committed; absent in public clones (then no-op).
+    private struct SeedConfig: Codable {
+        var kumaBaseURL, kumaSlug, kumaAPIKey: String?
+        var grafanaBaseURL, grafanaDatasourceUID, grafanaToken: String?
+        var homePageBaseURL: String?
+    }
+
+    private func seedFromBundleIfNeeded() {
+        guard !isConfigured else { return }
+        guard let url = Bundle.main.url(forResource: "seed", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let s = try? JSONDecoder().decode(SeedConfig.self, from: data) else { return }
+        if let v = s.kumaBaseURL { kumaBaseURL = v }
+        if let v = s.kumaSlug { kumaSlug = v }
+        if let v = s.grafanaBaseURL { grafanaBaseURL = v }
+        if let v = s.grafanaDatasourceUID, !v.isEmpty { grafanaDatasourceUID = v }
+        if let v = s.homePageBaseURL { homePageBaseURL = v }
+        if let v = s.kumaAPIKey, !v.isEmpty { kumaAPIKey = v }
+        if let v = s.grafanaToken, !v.isEmpty { grafanaToken = v }
     }
 
     // MARK: - Refresh orchestration

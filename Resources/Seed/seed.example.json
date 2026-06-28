@@ -1,0 +1,9 @@
+{
+  "kumaBaseURL": "https://kuma.example.com",
+  "kumaSlug": "default",
+  "kumaAPIKey": "",
+  "grafanaBaseURL": "https://grafana.example.com",
+  "grafanaDatasourceUID": "prometheus",
+  "grafanaToken": "",
+  "homePageBaseURL": "https://home.example.com"
+}

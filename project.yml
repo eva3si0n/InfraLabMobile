@@ -20,10 +20,13 @@ targets:
     sources:
       - Sources
       - path: Resources/Assets.xcassets   # explicit so actool compiles it (icon → Assets.car)
+      # Optional local pre-fill for personal builds. Resources/Seed/seed.json is
+      # gitignored (holds real URLs/token); only seed.example.json is committed.
+      - path: Resources/Seed
     info:
       path: Sources/Info.plist
       properties:
-        CFBundleDisplayName: InfraLab Mobile (iOS)
+        CFBundleDisplayName: InfraLab Mobile
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleIconName: AppIcon

@@ -18,3 +18,5 @@ xcuserdata/
 
 # Swift Package Manager
 .build/
+Resources/Seed/seed.json
+build-air/
