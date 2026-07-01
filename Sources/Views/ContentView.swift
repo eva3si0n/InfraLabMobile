@@ -8,6 +8,9 @@ struct ContentView: View {
             MonitorsView()
                 .tabItem { Label("Monitors", systemImage: "dot.radiowaves.up.forward") }
 
+            CascadeView()
+                .tabItem { Label("Cascade", systemImage: "arrow.triangle.branch") }
+
             MetricsView()
                 .tabItem { Label("Metrics", systemImage: "chart.xyaxis.line") }
 
