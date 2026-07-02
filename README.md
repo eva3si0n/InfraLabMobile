@@ -10,7 +10,8 @@
 </p>
 
 <p align="center">
-  📱 Android version: <a href="https://github.com/eva3si0n/InfraLab-Mobile-Android">InfraLab-Mobile-Android</a>
+  📟 iPadOS: <a href="https://github.com/eva3si0n/InfraLab-Mobile-iPadOS">InfraLab-Mobile-iPadOS</a> ·
+  📱 Android: <a href="https://github.com/eva3si0n/InfraLab-Mobile-Android">InfraLab-Mobile-Android</a>
 </p>
 
 <p align="center"><a href="#по-русски">Русская версия ниже ↓</a></p>
@@ -22,6 +23,7 @@
 InfraLab is a lightweight SwiftUI client that pulls everything together on your phone:
 
 - **Monitors** — your **Uptime Kuma** status page rendered natively: nodes are collapsible groups with an aggregate heartbeat rollup; tap one to expand every check (ping / port / DNS / push…) with its own Kuma-style heartbeat bar, latency and 24 h uptime.
+- **VPN Cascade** — live state of a WireGuard egress cascade: per segment the active leg with Healthy / Primary badges, WG throughput and per-leg RTT, a nested Kuma cascade monitor, egress-leg ping-from-home + monthly traffic vs cap, and a migration history. Built from Prometheus (via the Grafana proxy) + Uptime Kuma.
 - **Metrics** — a list of your **Grafana** dashboards; open one and every panel is drawn **natively** (Swift Charts for time series, plus stat / gauge / bar-gauge / table) straight from the dashboard's PromQL. No screenshots, no embedded web view.
 - **HomePage** — your [gethomepage](https://gethomepage.dev) portal shown in an in-app web view.
 
@@ -32,6 +34,7 @@ Everything is read-only, dark-mode first, and refreshes on a timer or pull-to-re
 | Tab | Source | API |
 |---|---|---|
 | Monitors | Uptime Kuma | public status-page endpoints (`/api/status-page/<slug>`, `/api/status-page/heartbeat/<slug>`) |
+| VPN Cascade | Uptime Kuma + Grafana→Prometheus | status-page heartbeats + PromQL via the datasource proxy |
 | Metrics | Grafana | `/api/search`, `/api/dashboards/uid/<uid>`, and Prometheus via the datasource proxy (`/api/datasources/proxy/uid/<ds>/api/v1/query[_range]`) |
 | HomePage | gethomepage | rendered in `WKWebView` |
 
@@ -90,6 +93,7 @@ Tokens are stored in the **Keychain**; plain settings live in `UserDefaults`. Fo
 **InfraLab Mobile** (iOS) — нативный iOS-дашборд для домашней лаборатории / self-hosted стека: **Uptime Kuma**, **Grafana** и портал **Homepage** в одном приложении. Android-версия: [InfraLab-Mobile-Android](https://github.com/eva3si0n/InfraLab-Mobile-Android).
 
 - **Monitors** — статус-страница **Uptime Kuma** нативно: узлы — сворачиваемые группы со сводной heartbeat-шкалой; тап разворачивает все проверки (ping / port / DNS / push…), у каждой своя Kuma-style шкала, задержка и аптайм за 24 ч.
+- **VPN Cascade** — состояние каскада WireGuard-egress в реальном времени: по каждому сегменту активное плечо с бейджами Healthy / Primary, throughput WG и RTT по плечам, вложенный Kuma-монитор каскада, пинг из дома + месячный трафик против лимита и история миграций. Данные — из Prometheus (через Grafana-прокси) + Uptime Kuma.
 - **Metrics** — список дашбордов **Grafana**; открываешь — и все панели рисуются **нативно** (Swift Charts для time series + stat / gauge / bar-gauge / table) прямо по PromQL из дашборда. Без скриншотов и встроенного веба.
 - **HomePage** — твой портал [gethomepage](https://gethomepage.dev) во встроенном web-view.
 
